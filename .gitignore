@@ -1,3 +1,4 @@
+*.swp
 *~
 .redcar/
 ant-task-sitemap-*.jar
