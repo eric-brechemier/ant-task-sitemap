@@ -34,7 +34,7 @@ public class Sitemap extends Task {
     }
 
     /**
-    * Recieves the url attribute from the ant task
+    * Receives the url attribute from the ant task
     * @param url
     */
     public void setUrl(String url) {
@@ -42,7 +42,7 @@ public class Sitemap extends Task {
     }
 
     /**
-    * Recieves the index attribute from the ant task
+    * Receives the index attribute from the ant task
     * @param index
     */
     public void setIndex(String index) {
@@ -50,7 +50,7 @@ public class Sitemap extends Task {
     }
 
     /**
-    * Recieves the lastmod attribute from the ant task
+    * Receives the lastmod attribute from the ant task
     * @param lastmod
     */
     public void setLastmod(String lastmod) {
