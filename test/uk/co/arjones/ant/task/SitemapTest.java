@@ -17,47 +17,47 @@ public class SitemapTest extends BuildFileTest {
         // initialize Ant
         configureProject("build.xml");
     }
-    
+
     public void tearDown() {
         // remove files
         getSitemapFile().delete();
         getSitemapGzipFile().delete();
     }
-    
+
     public void testWithoutURL() {
         expectBuildException("use.without.url", "Fail requested.");
-        
+
         // no sitemap
         assertFalse(sitemapExists());
-        
+
         // no sitemap gzip
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testWithoutDestDir() {
         expectBuildException("use.without.destdir", "Fail requested.");
-        
+
         // no sitemap
         assertFalse(sitemapExists());
-        
+
         // no sitemap gzip
         assertFalse(sitemapGzipExists());
     }
 
     public void testWithoutFiles() {
         expectBuildException("use.without.files", "Fail requested.");
-        
+
         // no sitemap
         assertFalse(sitemapExists());
-        
+
         // no sitemap gzip
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testDefault() {
         // run target
         executeTarget("use.default");
-        
+
         // check sitemap is valid
         File sitemap = getSitemapFile();
         assertTrue(sitemap.exists());
@@ -66,10 +66,10 @@ public class SitemapTest extends BuildFileTest {
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
-        
+
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testGzip() {
         executeTarget("use.gzip");
 
@@ -81,24 +81,24 @@ public class SitemapTest extends BuildFileTest {
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
-        
+
         assertTrue(sitemapGzipExists());
     }
-    
+
     public void testLastModFail() {
         expectBuildException("use.lastmod.fail", "Fail requested.");
-        
+
         // no sitemap
         assertFalse(sitemapExists());
-        
+
         // no sitemap gzip
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testLastModNow() {
         // run target
         executeTarget("use.lastmod.now");
-        
+
         // check sitemap is valid
         File sitemap = getSitemapFile();
         assertTrue(sitemap.exists());
@@ -109,14 +109,14 @@ public class SitemapTest extends BuildFileTest {
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
-        
+
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testLastModFromFile() {
         // run target
         executeTarget("use.lastmod.fromfile");
-        
+
         // check sitemap is valid
         File sitemap = getSitemapFile();
         assertTrue(sitemap.exists());
@@ -125,14 +125,14 @@ public class SitemapTest extends BuildFileTest {
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
-        
+
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testIndex() {
         // run target
         executeTarget("use.index");
-        
+
         // check sitemap is valid
         File sitemap = getSitemapFile();
         assertTrue(sitemap.exists());
@@ -141,14 +141,14 @@ public class SitemapTest extends BuildFileTest {
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
-        
+
         assertFalse(sitemapGzipExists());
     }
-    
+
     public void testIndexAbout() {
         // run target
         executeTarget("use.index.about");
-        
+
         // check sitemap is valid
         File sitemap = getSitemapFile();
         assertTrue(sitemap.exists());
@@ -157,10 +157,10 @@ public class SitemapTest extends BuildFileTest {
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
-        
+
         assertFalse(sitemapGzipExists());
     }
-    
+
     /**
      * Utility function to check if sitemap.xml exists.
      * @return true if it does exist, false if not.
@@ -168,7 +168,7 @@ public class SitemapTest extends BuildFileTest {
     private boolean sitemapExists(){
         return getSitemapFile().exists();
     }
-    
+
     /**
      * Utility function to check if sitemap.xml.gz exists.
      * @return true if it does exist, false if not.
@@ -176,7 +176,7 @@ public class SitemapTest extends BuildFileTest {
     private boolean sitemapGzipExists(){
         return getSitemapGzipFile().exists();
     }
-    
+
     /**
      * Returns the File for the sitemap.xml
      * @return new File object.
@@ -188,7 +188,7 @@ public class SitemapTest extends BuildFileTest {
             "/sitemap.xml"
         );
     }
-    
+
     /**
      * Returns the File for the sitemap.xml.gz
      * @return new File object.
