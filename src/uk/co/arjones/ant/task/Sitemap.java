@@ -15,14 +15,14 @@ import java.io.File;
 import java.util.Date;
 
 public class Sitemap extends Task {
-    
+
     private Vector<FileSet> filesets = new Vector<FileSet>();
     private File destdir;
     private String url;
     private String index = "index.*";
     private String lastmod;
     private boolean gzip = false;
-    
+
     /**
      * Receives a nested fileset from the ant task
      * @param fileset The nested fileset to recieve.
@@ -32,31 +32,31 @@ public class Sitemap extends Task {
             filesets.add(fileset);
         }
     }
-    
+
     /**
-    * Recieves the url attribute from the ant task
+    * Receives the url attribute from the ant task
     * @param url
     */
     public void setUrl(String url) {
         this.url = url;
     }
-    
+
     /**
-    * Recieves the index attribute from the ant task
+    * Receives the index attribute from the ant task
     * @param index
     */
     public void setIndex(String index) {
         this.index = index;
     }
-    
+
     /**
-    * Recieves the lastmod attribute from the ant task
+    * Receives the lastmod attribute from the ant task
     * @param lastmod
     */
     public void setLastmod(String lastmod) {
         this.lastmod = lastmod;
     }
-    
+
     /**
      * Receives the destdir attribute from the ant task.
      * @param destdir
@@ -64,7 +64,7 @@ public class Sitemap extends Task {
     public void setDestdir (File destdir) {
         this.destdir = destdir;
     }
-    
+
     /**
      * If true, also generate a gzip file
      * @param gzip
@@ -72,7 +72,7 @@ public class Sitemap extends Task {
     public void setGzip(boolean gzip) {
         this.gzip = gzip;
     }
-    
+
     /**
      * Executes the task
      */
@@ -80,25 +80,25 @@ public class Sitemap extends Task {
         if(this.url == null){
             throw new BuildException("You must specify the url");
         }
-        
+
         if(this.destdir == null){
             throw new BuildException("You must specify the destdir");
         }
-        
+
         if (filesets.size() == 0) {
             throw new BuildException("You must specify one or more fileset child elements");
         }
-        
+
         try {
             WebSitemapGenerator wsg = new WebSitemapGenerator(this.url, this.destdir);
             WebSitemapGenerator wsgzip = null;
             if(this.gzip == true){
                 wsgzip = WebSitemapGenerator.builder(this.url, this.destdir).gzip(true).build();
             }
-            
+
             // Loop through fileset
             for (int i = 0; i < filesets.size(); i++) {
-            
+
                 // Get current fileset
                 FileSet fs = filesets.elementAt(i);
                 DirectoryScanner ds = fs.getDirectoryScanner(getProject());
@@ -114,12 +114,12 @@ public class Sitemap extends Task {
 
                     // Make file object from base directory and filename
                     File temp = new File(dir,srcs[j]);
-                    
+
                     String path = this.url + "/" + temp.getName();
                     if(temp.getName().matches(this.index)){
                         path = this.url + "/";
                     }
-                    
+
                     // create the url
                     WebSitemapUrl url;
                     if(this.lastmod != null){
@@ -136,20 +136,20 @@ public class Sitemap extends Task {
 
                     // add to sitemap
                     wsg.addUrl(url);
-                    
+
                     // add to sitemap gzip
                     if(wsgzip != null){
                         wsgzip.addUrl(url);
                     }
                 }
                 wsg.write();
-                
+
                 if(wsgzip != null){
                     wsgzip.write();
                 }
             }
         } catch(Exception e) {
             throw new BuildException(e);
-        }            
+        }
     }
 }
