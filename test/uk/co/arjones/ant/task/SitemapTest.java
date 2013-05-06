@@ -103,9 +103,7 @@ public class SitemapTest extends BuildFileTest {
         File sitemap = getSitemapFile();
         assertTrue(sitemap.exists());
         try {
-            // FIXME: this fails. No idea why, but it shouldn't
-            // for now, cheat
-            //SitemapValidator.validateWebSitemap(sitemap);
+            SitemapValidator.validateWebSitemap(sitemap);
         } catch( Exception e ){
             fail("exception thrown when validating sitemap");
         }
