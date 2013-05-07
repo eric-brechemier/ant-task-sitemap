@@ -25,6 +25,9 @@
             <fileset dir="${classes.dir}"/>
             <fileset dir="${report.dir}"/>
             <fileset dir="${docs.dir}"/>
+            <!-- TODO: also delete sitemap.xml, sitemap.xml.gz
+            which may be left from use.* tasks run directly from ant
+            in test-resources/ -->
         </delete>
         <mkdir dir="${classes.dir}"/>
     </target>
@@ -83,6 +86,7 @@
     <target name="use.default" description="Use with default" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}">
+            <!-- TODO: define test file set, including all htm(l) files in sub-directories too -->
             <fileset dir="${test-resources.dir}">
                 <include name="**.htm"/>
                 <include name="**.html"/>
