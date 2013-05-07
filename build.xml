@@ -13,6 +13,11 @@
         <fileset dir="${testlib.dir}" includes="**/*.jar"/>
     </path>
 
+    <fileset id="fileset.test" dir="${test-resources.dir}">
+        <include name="**.htm"/>
+        <include name="**.html"/>
+    </fileset>
+
 <!-- default target -->
     <target name="build" description="Build JAR, run tests"
       depends="clean, compile, jar, compile-test, test"
@@ -87,71 +92,49 @@
     <target name="use.default" description="Use with default" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}">
-            <!-- TODO: define test file set, including all htm(l) files in sub-directories too -->
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
     <target name="use.gzip" description="Use with default" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}" gzip="yes">
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
     <target name="use.index" description="Use with index defined" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}">
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
     <target name="use.index.about" description="Use with index defined" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}" index="about.*">
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
     <target name="use.lastmod.now" description="Use with lastmod=today" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}" lastmod="now">
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
     <target name="use.lastmod.fromfile" description="Use with lastmod=fromfile" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}" lastmod="fromfile">
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
     <target name="use.lastmod.fail" description="Use with lastmod=fail" depends="jar">
         <taskdef name="sitemap" classname="uk.co.arjones.ant.task.Sitemap" classpathref="classpath.run"/>
         <sitemap url="http://www.example.com" destdir="${test-resources.dir}" lastmod="fail">
-            <fileset dir="${test-resources.dir}">
-                <include name="**.htm"/>
-                <include name="**.html"/>
-            </fileset>
+            <fileset refid="fileset.test" />
         </sitemap>
     </target>
 
