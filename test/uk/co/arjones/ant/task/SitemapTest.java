@@ -21,6 +21,7 @@ public class SitemapTest extends BuildFileTest {
     public void setUp() {
         // initialize Ant
         configureProject("build.xml");
+        removeGeneratedFiles();
     }
 
     public void tearDown() {
