@@ -13,15 +13,18 @@ public class SitemapTest extends BuildFileTest {
         super(s);
     }
 
+    protected void removeGeneratedFiles() {
+        getSitemapFile().delete();
+        getSitemapGzipFile().delete();
+    }
+
     public void setUp() {
         // initialize Ant
         configureProject("build.xml");
     }
 
     public void tearDown() {
-        // remove files
-        getSitemapFile().delete();
-        getSitemapGzipFile().delete();
+      removeGeneratedFiles();
     }
 
     public void testWithoutURL() {
