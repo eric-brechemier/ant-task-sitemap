@@ -25,9 +25,10 @@
             <fileset dir="${classes.dir}"/>
             <fileset dir="${report.dir}"/>
             <fileset dir="${docs.dir}"/>
-            <!-- TODO: also delete sitemap.xml, sitemap.xml.gz
-            which may be left from use.* tasks run directly from ant
-            in test-resources/ -->
+            <fileset dir="${test-resources.dir}">
+                <include name="sitemap*.xml"/>
+                <include name="sitemap*.xml.gz"/>
+            </fileset>
         </delete>
         <mkdir dir="${classes.dir}"/>
     </target>
